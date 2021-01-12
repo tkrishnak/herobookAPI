@@ -45,3 +45,7 @@ image, real name, hero name, height, weight, special power, intelligence, streng
 }
 
 -- Throw HeroNotFoundException with message "Hero doesn't exist"
+
+1. Controller Test - HeroPersonaController
+2. Service - HeroPersonaService
+3. Repository - HeroPersonaRepository
