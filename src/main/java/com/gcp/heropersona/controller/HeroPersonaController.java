@@ -11,13 +11,15 @@ import java.util.List;
 
 @RestController
 public class HeroPersonaController {
-    List<Hero> heroList;
+    private List<Hero> heroList;
 
     public HeroPersonaController() {
         Hero hero = new Hero("Batman");
         heroList = new ArrayList<>();
         heroList.add(hero);
         hero = new Hero("SpiderMan");
+        heroList.add(hero);
+        hero = new Hero("SuperMan");
         heroList.add(hero);
     }
 
