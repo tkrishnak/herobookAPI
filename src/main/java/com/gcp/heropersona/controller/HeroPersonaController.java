@@ -1,8 +1,11 @@
 package com.gcp.heropersona.controller;
 
+import com.gcp.heropersona.customexception.HeroNotFoundException;
 import com.gcp.heropersona.entity.Hero;
 import com.gcp.heropersona.service.HeroPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +37,11 @@ public class HeroPersonaController {
     }
 
     @GetMapping("/gcp/api/heros/{name}")
-    public Hero getHeroByName(@PathVariable String name) {
-        return heroList.stream().filter(hero -> hero.getHeroName().equalsIgnoreCase(name)).findFirst().orElse(null);
+    public ResponseEntity getHeroByName(@PathVariable String name) throws HeroNotFoundException {
+        List<Hero> myHero =  heroList.stream().filter(hero -> hero.getHeroName().equalsIgnoreCase(name)).collect(Collectors.toList());
+        if(myHero != null && myHero.size()>0)
+            return ResponseEntity.ok().body(myHero.get(0));
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hero doesn't exist");
     }
 }

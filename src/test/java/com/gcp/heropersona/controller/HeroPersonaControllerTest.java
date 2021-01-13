@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -49,6 +50,18 @@ public class HeroPersonaControllerTest {
                 (get("/gcp/api/heros/Batman")))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expected));
+
+    }
+
+    @Test
+    public void testNoHeroFound() throws Exception {
+        String expected = "Hero doesn't exist";
+        mvc.perform(
+                (get("/gcp/api/heros/xxx")))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string(expected));
+
+
 
     }
 }
