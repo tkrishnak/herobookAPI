@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/gcp/api")
 public class HeroPersonaController {
     private List<Hero> heroList;
 
@@ -31,12 +33,12 @@ public class HeroPersonaController {
         heroList.add(hero);
     }
 
-    @GetMapping("/gcp/api/heros")
+    @GetMapping("/heros")
     public List<Hero> getAllHeros(){
         return heroList;
     }
 
-    @GetMapping("/gcp/api/heros/{name}")
+    @GetMapping("/heros/{name}")
     public ResponseEntity getHeroByName(@PathVariable String name) throws HeroNotFoundException {
         List<Hero> myHero =  heroList.stream().filter(hero -> hero.getHeroName().equalsIgnoreCase(name)).collect(Collectors.toList());
         if(myHero != null && myHero.size()>0)
