@@ -2,6 +2,7 @@ package com.gcp.heropersona.controller;
 
 import com.gcp.heropersona.customexception.HeroNotFoundException;
 import com.gcp.heropersona.entity.Hero;
+import com.gcp.heropersona.entity.Villain;
 import com.gcp.heropersona.service.HeroPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/gcp/api")
 public class HeroPersonaController {
     private List<Hero> heroList;
+    private List<Villain> villainList;
 
     public HeroPersonaController() {
         Hero hero = new Hero("/src/batman.jpg","Bruce Wayne","Batman","6 feet","180 lbs",
@@ -31,6 +33,16 @@ public class HeroPersonaController {
         heroList.add(hero);
         hero = new Hero("SuperMan");
         heroList.add(hero);
+
+        Villain villain = new Villain("Joker","Batman","/src/joker.jpg","Jack Napier","Batman","6 feet","180 lbs",
+                "None", "200", "60", "None", "Fast","70",
+                "Fighting Batman", "Fight Batman with all his evil ideas");
+        villainList = new ArrayList<>();
+        villainList.add(villain);
+        villain = new Villain("Dr.Octopus");
+        villainList.add(villain);
+        villain = new Villain("Lex Luther");
+        villainList.add(villain);
     }
 
     @GetMapping("/heros")
@@ -45,5 +57,10 @@ public class HeroPersonaController {
             return ResponseEntity.ok().body(myHero.get(0));
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hero doesn't exist");
+    }
+
+    @GetMapping("/villains")
+    public List<Villain> getAllVillains(){
+        return villainList;
     }
 }

@@ -11,8 +11,8 @@
 | /gcp/api/heros/{name}  | GET  |200 |Return the details of the hero by the input name |
 | /gcp/api/heros/{name}  | GET  |404 |Return  message "Hero doesn't exist" when no hero found with the given input|
 | /gcp/api/villains  | GET  | 200 | API to get all the villain's names for the visitor |
-| /gcp/api/villain/{name}  | GET  |200 |Return the details of the villain by the input name |
-| /gcp/api/villain/{name}  | GET  |404 |Return  message "Villain doesn't exist" when no villain found with the given input|
+| /gcp/api/villains/{name}  | GET  |200 |Return the details of the villain by the input name |
+| /gcp/api/villains/{name}  | GET  |404 |Return  message "Villain doesn't exist" when no villain found with the given input|
 
 ### API --> /gcp/api/heros
 #### Response
@@ -49,21 +49,21 @@
 ####Response - If the hero is not found by the name
 return HTTP status not found with message "Hero doesn't exist."
 
-### API --> /gcp/api/villain
+### API --> /gcp/api/villains
 #### Response
 [
 {
 "villainName":"Joker"
 },
 {
-"villainName":"Dr. Octopus"
+"villainName":"Dr.Octopus"
 },
 {
 "villainName":"Lex Luther"
 }
 ]Villains have an arch rival, image, real name, hero name, height, weight, special power, intelligence, strength, power, speed, agility, description, and story.
 
-### API --> /gcp/api/villain/{name}
+### API --> /gcp/api/villains/{name}
 ####Response - If the villain is found by the name
 {
 "archRival":"Batman"

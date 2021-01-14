@@ -62,7 +62,12 @@ public class HeroPersonaControllerTest {
                 .andExpect(content().string(expected));
     }
     @Test
-    public void testFindAllVillains(){
-
+    public void testFindAllVillains() throws Exception {
+        mvc.perform(
+                (get("/gcp/api/villains")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].villainName").value("Joker"))
+                .andExpect(jsonPath("$[1].villainName").value("Dr.Octopus"))
+                .andExpect(jsonPath("length()").value(3));
     }
 }
