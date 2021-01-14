@@ -60,8 +60,9 @@ public class HeroPersonaControllerTest {
                 (get("/gcp/api/heros/xxx")))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(expected));
-
-
+    }
+    @Test
+    public void testFindAllVillains(){
 
     }
 }
