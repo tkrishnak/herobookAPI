@@ -67,6 +67,6 @@ public class HeroPersonaController {
         if(myVillain != null && myVillain.size()>0)
             return ResponseEntity.ok().body(myVillain.get(0));
         else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hero doesn't exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Villain doesn't exist");
     }
 }

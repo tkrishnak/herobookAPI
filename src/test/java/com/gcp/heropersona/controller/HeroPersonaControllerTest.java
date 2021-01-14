@@ -82,4 +82,13 @@ public class HeroPersonaControllerTest {
                 .andExpect(content().json(expected));
 
     }
+
+    @Test
+    public void testNoVillainFound() throws Exception {
+        String expected = "Villain doesn't exist";
+        mvc.perform(
+                (get("/gcp/api/villains/xxx")))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string(expected));
+    }
 }
