@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/gcp/api")
+@RequestMapping("/gcp/api/heros")
 public class HeroPersonaController {
 
     private HeroPersonaService heroPersonaService;
@@ -24,33 +24,18 @@ public class HeroPersonaController {
         this.heroPersonaService = heroPersonaService;
     }
 
-    @GetMapping("/heros")
+    @GetMapping()
     public List<Hero> getAllHeros(){
         return heroPersonaService.getAllHeros();
     }
 
-    @GetMapping("/heros/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity getHeroByName(@PathVariable String name) throws HeroNotFoundException {
         Optional<Hero> hero = heroPersonaService.findHeroByName(name);
         if(hero.isPresent()) {
             return ResponseEntity.ok().body(hero);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hero doesn't exist");
-        }
-    }
-
-    @GetMapping("/villains")
-    public List<Villain> getAllVillains(){
-        return heroPersonaService.findAllVillains();
-    }
-
-    @GetMapping("/villains/{name}")
-    public ResponseEntity getVillainsByName(@PathVariable String name) throws HeroNotFoundException {
-        Optional<Villain> villain = heroPersonaService.findVillainByName(name);
-        if(villain.isPresent()) {
-            return ResponseEntity.ok().body(villain);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Villain doesn't exist");
         }
     }
 }

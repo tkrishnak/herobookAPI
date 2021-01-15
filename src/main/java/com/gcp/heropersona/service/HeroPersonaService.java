@@ -27,12 +27,4 @@ public class HeroPersonaService {
     public Optional<Hero> findHeroByName(String name) {
         return heroRepository.findById(name);
     }
-
-    public List<Villain> findAllVillains() {
-        return villainRepository.findAll();
-    }
-
-    public Optional<Villain> findVillainByName(String name) {
-        return villainRepository.findById(name);
-    }
 }
