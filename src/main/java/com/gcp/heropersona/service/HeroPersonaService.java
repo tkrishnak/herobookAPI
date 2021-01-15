@@ -31,4 +31,8 @@ public class HeroPersonaService {
     public List<Villain> findAllVillains() {
         return villainRepository.findAll();
     }
+
+    public Optional<Villain> findVillainByName(String name) {
+        return villainRepository.findById(name);
+    }
 }
