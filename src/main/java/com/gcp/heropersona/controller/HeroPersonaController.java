@@ -3,6 +3,7 @@ package com.gcp.heropersona.controller;
 import com.gcp.heropersona.customexception.HeroNotFoundException;
 import com.gcp.heropersona.entity.Hero;
 import com.gcp.heropersona.entity.Villain;
+import com.gcp.heropersona.service.HeroPersonaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,13 @@ public class HeroPersonaController {
     private List<Hero> heroList;
     private List<Villain> villainList;
 
-    public HeroPersonaController() {
+    private HeroPersonaService heroPersonaService;
+
+    public HeroPersonaController(HeroPersonaService heroPersonaService) {
+        this.heroPersonaService = heroPersonaService;
+    }
+
+    /*public HeroPersonaController() {
         Hero hero = new Hero("/src/batman.jpg","Bruce Wayne","Batman","6 feet","180 lbs",
         "None", "100", "90", "None", "Normal","60",
                 "Fighting crime at night wearing bat suit", "Turned into batman to make the gotham city safer");
@@ -40,11 +47,11 @@ public class HeroPersonaController {
         villainList.add(villain);
         villain = new Villain("Lex Luther");
         villainList.add(villain);
-    }
+    }*/
 
     @GetMapping("/heros")
     public List<Hero> getAllHeros(){
-        return heroList;
+        return heroPersonaService.getAllHeros();
     }
 
     @GetMapping("/heros/{name}")

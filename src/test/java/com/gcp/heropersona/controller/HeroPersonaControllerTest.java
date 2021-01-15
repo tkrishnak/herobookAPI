@@ -1,27 +1,37 @@
 package com.gcp.heropersona.controller;
 
 import com.gcp.heropersona.entity.Hero;
+import com.gcp.heropersona.repository.HeroPersonaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureTestDatabase
 public class HeroPersonaControllerTest {
 
     @Autowired
     private MockMvc mvc;
-    private List<Hero> heroList;
-
+    @Autowired
+    private HeroPersonaRepository heroPersonaRepository;
 
     @Test
     public void testFindAllHeros() throws Exception {
+        Hero hero = new Hero("Batman");
+        heroPersonaRepository.save(hero);
+        hero = new Hero("SpiderMan");
+        heroPersonaRepository.save(hero);
+        hero = new Hero("SuperMan");
+        heroPersonaRepository.save(hero);
+
         mvc.perform(
                 (get("/gcp/api/heros")))
                 .andExpect(status().isOk())

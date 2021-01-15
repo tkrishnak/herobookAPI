@@ -1,10 +1,14 @@
 package com.gcp.heropersona.entity;
 
-public class Hero {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Hero {
 
     private String image;
     private String realName;
+    @Id
     private String heroName;
     private String height;
     private String weight;

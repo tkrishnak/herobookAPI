@@ -1,17 +1,21 @@
 package com.gcp.heropersona.service;
 
 import com.gcp.heropersona.entity.Hero;
+import com.gcp.heropersona.repository.HeroPersonaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class HeroPersonaService {
+
+    HeroPersonaRepository heroPersonaRepository;
+
+    public HeroPersonaService(HeroPersonaRepository heroPersonaRepository) {
+        this.heroPersonaRepository = heroPersonaRepository;
+    }
+
     public List<Hero> getAllHeros() {
-        Hero hero = new Hero("Batman");
-        List<Hero> heroList = new ArrayList<>();
-        heroList.add(hero);
-        return heroList;
+        return heroPersonaRepository.findAll();
     }
 }
