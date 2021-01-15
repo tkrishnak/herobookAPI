@@ -5,6 +5,7 @@ import com.gcp.heropersona.repository.HeroPersonaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HeroPersonaService {
@@ -17,5 +18,9 @@ public class HeroPersonaService {
 
     public List<Hero> getAllHeros() {
         return heroPersonaRepository.findAll();
+    }
+
+    public Optional<Hero> findHeroByName(String name) {
+        return heroPersonaRepository.findById(name);
     }
 }

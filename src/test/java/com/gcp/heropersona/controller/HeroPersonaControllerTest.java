@@ -2,7 +2,10 @@ package com.gcp.heropersona.controller;
 
 import com.gcp.heropersona.entity.Hero;
 import com.gcp.heropersona.repository.HeroPersonaRepository;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class HeroPersonaControllerTest {
 
     @Autowired
@@ -23,14 +27,20 @@ public class HeroPersonaControllerTest {
     @Autowired
     private HeroPersonaRepository heroPersonaRepository;
 
-    @Test
-    public void testFindAllHeros() throws Exception {
-        Hero hero = new Hero("Batman");
+    @BeforeAll
+    public void SetUp(){
+        Hero hero = new Hero("/src/batman.jpg","Bruce Wayne","Batman","6 feet","180 lbs",
+                "None", "100", "90", "None", "Normal","60",
+                "Fighting crime at night wearing bat suit", "Turned into batman to make the gotham city safer");
         heroPersonaRepository.save(hero);
         hero = new Hero("SpiderMan");
         heroPersonaRepository.save(hero);
         hero = new Hero("SuperMan");
         heroPersonaRepository.save(hero);
+    }
+
+    @Test
+    public void testFindAllHeros() throws Exception {
 
         mvc.perform(
                 (get("/gcp/api/heros")))

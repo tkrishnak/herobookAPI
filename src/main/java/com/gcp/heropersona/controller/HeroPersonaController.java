@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,11 +57,12 @@ public class HeroPersonaController {
 
     @GetMapping("/heros/{name}")
     public ResponseEntity getHeroByName(@PathVariable String name) throws HeroNotFoundException {
-        List<Hero> myHero =  heroList.stream().filter(hero -> hero.getHeroName().equalsIgnoreCase(name)).collect(Collectors.toList());
-        if(myHero != null && myHero.size()>0)
-            return ResponseEntity.ok().body(myHero.get(0));
-        else
+        Optional<Hero> hero = heroPersonaService.findHeroByName(name);
+        if(hero.isPresent()) {
+            return ResponseEntity.ok().body(hero);
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hero doesn't exist");
+        }
     }
 
     @GetMapping("/villains")
