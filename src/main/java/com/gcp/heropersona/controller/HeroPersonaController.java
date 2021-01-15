@@ -67,15 +67,15 @@ public class HeroPersonaController {
 
     @GetMapping("/villains")
     public List<Villain> getAllVillains(){
-        return villainList;
+        return heroPersonaService.findAllVillains();
     }
 
     @GetMapping("/villains/{name}")
     public ResponseEntity getVillainsByName(@PathVariable String name) throws HeroNotFoundException {
-        List<Hero> myVillain =  villainList.stream().filter(villain -> villain.getVillainName().equalsIgnoreCase(name)).collect(Collectors.toList());
-        if(myVillain != null && myVillain.size()>0)
-            return ResponseEntity.ok().body(myVillain.get(0));
-        else
+        //List<Hero> myVillain =  villainList.stream().filter(villain -> villain.getVillainName().equalsIgnoreCase(name)).collect(Collectors.toList());
+        //if(myVillain != null && myVillain.size()>0)
+          //  return ResponseEntity.ok().body(myVillain.get(0));
+        //else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Villain doesn't exist");
     }
 }

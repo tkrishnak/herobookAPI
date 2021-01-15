@@ -1,8 +1,9 @@
 package com.gcp.heropersona.controller;
 
 import com.gcp.heropersona.entity.Hero;
-import com.gcp.heropersona.repository.HeroPersonaRepository;
-import org.aspectj.lang.annotation.Before;
+import com.gcp.heropersona.entity.Villain;
+import com.gcp.heropersona.repository.HeroRepository;
+import com.gcp.heropersona.repository.VillainRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -25,18 +26,28 @@ public class HeroPersonaControllerTest {
     @Autowired
     private MockMvc mvc;
     @Autowired
-    private HeroPersonaRepository heroPersonaRepository;
+    private HeroRepository heroRepository;
+    @Autowired
+    private VillainRepository villainRepository;
 
     @BeforeAll
     public void SetUp(){
         Hero hero = new Hero("/src/batman.jpg","Bruce Wayne","Batman","6 feet","180 lbs",
                 "None", "100", "90", "None", "Normal","60",
                 "Fighting crime at night wearing bat suit", "Turned into batman to make the gotham city safer");
-        heroPersonaRepository.save(hero);
+        heroRepository.save(hero);
         hero = new Hero("SpiderMan");
-        heroPersonaRepository.save(hero);
+        heroRepository.save(hero);
         hero = new Hero("SuperMan");
-        heroPersonaRepository.save(hero);
+        heroRepository.save(hero);
+        Villain villain = new Villain("Joker","Batman","/src/joker.jpg","Jack Napier","Batman","6 feet","180 lbs",
+                "None", "200", "60", "None", "Fast","70",
+                "Fighting Batman", "Fight Batman with all his evil ideas");
+        villainRepository.save(villain);
+        villain = new Villain("Dr.Octopus");
+        villainRepository.save(villain);
+        villain = new Villain("Lex Luther");
+        villainRepository.save(villain);
     }
 
     @Test
